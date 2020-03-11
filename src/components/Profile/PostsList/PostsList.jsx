@@ -10,10 +10,8 @@ const PostsList = () => {
                 New post
             </div>
             <div className={style.posts}>
-                <Post />
-                <Post />
-                <Post />
-                <Post />
+                <Post message="It's my blog" likesCount='0'/>
+                <Post message='Hello world!!' likesCount='23'/>
             </div>
         </div>
     )
