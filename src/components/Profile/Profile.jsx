@@ -4,9 +4,9 @@ import PostsList from "./PostsList/PostsList";
 
 const Profile = () => {
     return (
-        <div className={style.content}>
+        <div>
             <div>
-                <img src="" alt="profile background picture"/>
+                <img src="" alt="profile background"/>
             </div>
             <div>
                 <img src="" alt="avatar"/>
