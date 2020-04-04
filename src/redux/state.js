@@ -1,15 +1,23 @@
+import { rerenderEntireTree } from "../render";
+
+let generateId = (array) => {
+    let maxId = Math.max.apply(Math, array.map(el => el.id ));
+    return maxId + 1;
+};
+
 let state = {
     profile: {
+        newPostText: "",
         posts: [
-            {
-                id: 2,
-                message: 'It\'s my blog',
-                likesCount: 0
-            },
             {
                 id: 1,
                 message: 'Hello world!!',
                 likesCount: 23
+            },
+            {
+                id: 2,
+                message: 'It\'s my blog',
+                likesCount: 0
             }
         ]
     },
@@ -49,6 +57,24 @@ let state = {
                 messages: []
             }
         ]
+    }
+};
+
+export let events = {
+    addPost: () => {
+        let newPost = {
+            id: generateId(state.profile.posts),
+            message: state.profile.newPostText,
+            likesCount: 0
+        };
+
+        state.profile.posts.push(newPost);
+        state.profile.newPostText = "";
+        rerenderEntireTree(state, events);
+    },
+    updateNewPostText: (postText) => {
+        state.profile.newPostText = postText;
+        rerenderEntireTree(state, events);
     }
 };
 
