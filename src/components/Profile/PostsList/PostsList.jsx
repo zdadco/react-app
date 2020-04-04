@@ -3,15 +3,21 @@ import style from './PostsList.module.css'
 import Post from "./Post/Post";
 
 const PostsList = (props) => {
-    let posts = props.posts.map(post => <Post key={post.id} post={post}/>);
+    let posts = props.posts.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}/>);
+
+    let newPostEl = React.createRef();
 
     let addPost = () => {
-        props.events.addPost();
+        props.dispatch({
+            type: 'ADD-POST'
+        });
     };
 
     function onNewPostElChange() {
-        let text = props.newPostText;
-        props.events.updateNewPostText(text);
+        props.dispatch({
+            type: 'UPDATE-NEW-POST-TEXT',
+            newText: newPostEl.current.value
+        });
     }
 
     return (
@@ -19,7 +25,8 @@ const PostsList = (props) => {
             <h3>Posts</h3>
             <div>
                 <div>
-                    <textarea value={props.newPostText}
+                    <textarea ref={newPostEl}
+                              value={props.newPostText}
                               onChange={onNewPostElChange}
                     />
                 </div>

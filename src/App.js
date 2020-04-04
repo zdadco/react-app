@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Route} from "react-router-dom"
+import {Route} from "react-router-dom"
 
 import './App.css'
 import Header from "./components/Header/Header"
@@ -9,16 +9,16 @@ import Profile from "./components/Profile/Profile";
 
 const App = (props) => {
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <NavBar/>
-                <div className="app-wrapper-content">
-                    <Route path='/profile' render={ () => <Profile state={props.state.profile} events={props.events}/> }/>
-                    <Route path='/dialogs' render={ () => <Dialogs state={props.state.dialogs}/> }/>
-                </div>
+        <div className="app-wrapper">
+            <Header/>
+            <NavBar/>
+            <div className="app-wrapper-content">
+                <Route path='/profile'
+                       render={() => <Profile state={props.state.profile} dispatch={props.dispatch}/>}/>
+                <Route path='/dialogs'
+                       render={() => <Dialogs state={props.state.dialogs}/>}/>
             </div>
-        </BrowserRouter>
+        </div>
     )
 };
 
