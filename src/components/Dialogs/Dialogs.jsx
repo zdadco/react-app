@@ -4,8 +4,8 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-    let dialogs = props.dialogs.map(user => <Dialog user={user}/>);
-    let messages = props.dialogs[0].messages.map(message => <Message message={message}/>);
+    let dialogs = props.state.dialogs.map(user => <Dialog user={user}/>);
+    let messages = props.state.dialogs[0].messages.map(message => <Message message={message}/>);
 
     return (
         <div className={style.dialogs_wrapper}>

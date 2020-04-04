@@ -3,7 +3,7 @@ import style from './PostsList.module.css'
 import Post from "./Post/Post";
 
 const PostsList = (props) => {
-    let posts = props.posts.map(post => <Post post={post}/>);
+    let posts = props.posts.map(post => <Post key={post.id} post={post}/>);
 
     return (
         <div className={style.profile_posts_block}>
