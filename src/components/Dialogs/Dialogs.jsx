@@ -3,19 +3,9 @@ import style from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
-const Dialogs = () => {
-    let dialogs = [
-        {id: 1, name: 'Yaroslav'},
-        {id: 2, name: 'Valera'},
-        {id: 3, name: 'Dima'},
-        {id: 4, name: 'Vova'}
-    ].map(user => <Dialog user={user}/>)
-
-    let messages = [
-        {id: 1, text: 'Hi'},
-        {id: 2, text: 'How are you?'},
-        {id: 3, text: 'How is your name?'},
-    ].map(message => <Message message={message}/>)
+const Dialogs = (props) => {
+    let dialogs = props.dialogs.map(user => <Dialog user={user}/>);
+    let messages = props.dialogs[0].messages.map(message => <Message message={message}/>);
 
     return (
         <div className={style.dialogs_wrapper}>
@@ -27,6 +17,6 @@ const Dialogs = () => {
             </div>
         </div>
     )
-}
+};
 
 export default Dialogs

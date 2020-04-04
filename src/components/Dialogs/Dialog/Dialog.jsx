@@ -8,6 +8,6 @@ const Dialog = (props) => {
             <NavLink to={'/dialogs/' + props.user.id} activeClassName={style.active}>{props.user.name}</NavLink>
         </div>
     )
-}
+};
 
 export default Dialog

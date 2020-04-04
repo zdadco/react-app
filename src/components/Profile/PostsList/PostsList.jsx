@@ -2,12 +2,8 @@ import React from "react"
 import style from './PostsList.module.css'
 import Post from "./Post/Post";
 
-const PostsList = () => {
-
-    let posts = [
-        {id: 2, message: 'It\'s my blog', likesCount: 0},
-        {id: 1, message: 'Hello world!!', likesCount: 23},
-    ].map(post => <Post post={post}/>)
+const PostsList = (props) => {
+    let posts = props.posts.map(post => <Post post={post}/>);
 
     return (
         <div className={style.profile_posts_block}>
@@ -25,6 +21,6 @@ const PostsList = () => {
             </div>
         </div>
     )
-}
+};
 
 export default PostsList
