@@ -1,19 +1,11 @@
 import React from "react"
-import style from './Profile.module.css'
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import PostsList from "./PostsList/PostsList";
 
 const Profile = () => {
     return (
         <div>
-            <div>
-                <img src="" alt="profile background"/>
-            </div>
-            <div>
-                <img src="" alt="avatar"/>
-                <div>
-                    Description
-                </div>
-            </div>
+            <ProfileInfo/>
             <PostsList />
         </div>
     )
