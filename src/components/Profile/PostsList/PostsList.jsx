@@ -7,7 +7,7 @@ const PostsList = () => {
     let posts = [
         {id: 2, message: 'It\'s my blog', likesCount: 0},
         {id: 1, message: 'Hello world!!', likesCount: 23},
-    ].map(post =>  <Post post={post}/>)
+    ].map(post => <Post post={post}/>)
 
     return (
         <div className={style.profile_posts_block}>
@@ -21,7 +21,7 @@ const PostsList = () => {
                 </div>
             </div>
             <div className={style.posts}>
-                { posts }
+                {posts}
             </div>
         </div>
     )

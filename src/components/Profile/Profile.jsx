@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <PostsList />
+            <PostsList/>
         </div>
     )
 }

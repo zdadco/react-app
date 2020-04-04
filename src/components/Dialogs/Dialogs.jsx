@@ -9,21 +9,21 @@ const Dialogs = () => {
         {id: 2, name: 'Valera'},
         {id: 3, name: 'Dima'},
         {id: 4, name: 'Vova'}
-    ].map(user =>  <Dialog user={user}/>)
+    ].map(user => <Dialog user={user}/>)
 
     let messages = [
         {id: 1, text: 'Hi'},
         {id: 2, text: 'How are you?'},
         {id: 3, text: 'How is your name?'},
-    ].map(message =>  <Message message={message}/>)
+    ].map(message => <Message message={message}/>)
 
     return (
         <div className={style.dialogs_wrapper}>
             <div className={style.dialogs}>
-                { dialogs }
+                {dialogs}
             </div>
             <div className={style.messages}>
-                { messages }
+                {messages}
             </div>
         </div>
     )
