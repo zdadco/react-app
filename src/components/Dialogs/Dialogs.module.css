@@ -1,12 +1,31 @@
 .dialogs_wrapper {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    height: 100%;
 }
 
 .dialogs {
     padding: 10px;
 }
 
+.dialog {
+    display: flex;
+    flex-direction: column;
+}
+
 .messages {
     padding: 10px;
+    flex: 1 0 auto;
+}
+
+.add {
+    flex: 0 0 auto;
+}
+
+.add_message_area {
+    margin: 0 10px;
+}
+
+.add_btn {
+
 }
