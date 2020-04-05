@@ -2,11 +2,11 @@ import React from "react"
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import PostsListContainer from "./PostsList/PostsListContainer";
 
-const Profile = (props) => {
+const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <PostsListContainer store={props.store}/>
+            <PostsListContainer/>
         </div>
     )
 };
