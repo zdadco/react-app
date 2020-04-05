@@ -4,10 +4,10 @@ let generateId = (array) => {
 };
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const POST_TEXT_CHANGE = 'POST-TEXT-CHANGE';
 
 let initialState = {
-    newPostText: "",
+    postText: "",
     posts: [
         {
             id: 1,
@@ -27,15 +27,15 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: generateId(state.posts),
-                message: state.newPostText,
+                message: state.postText,
                 likesCount: 0
             };
 
             state.posts.push(newPost);
-            state.newPostText = "";
+            state.postText = "";
             return state;
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
+        case POST_TEXT_CHANGE:
+            state.postText = action.newText;
             return state;
         default:
             return state;
@@ -47,9 +47,9 @@ export const addPostActionCreator = () => {
         type: ADD_POST
     }
 };
-export const updateNewPostTextActionCreator = (text) => {
+export const postTextChangeActionCreator = (text) => {
     return {
-        type: UPDATE_NEW_POST_TEXT,
+        type: POST_TEXT_CHANGE,
         newText: text
     }
 };

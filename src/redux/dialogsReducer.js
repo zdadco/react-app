@@ -4,10 +4,10 @@ let generateId = (array) => {
 };
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const MESSAGE_TEXT_CHANGE = 'MESSAGE-TEXT-CHANGE';
 
 let initialState = {
-    newMessageText: "",
+    messageText: "",
     dialogs: [
         {
             id: 1,
@@ -50,14 +50,14 @@ const dialogsReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             let newPost = {
                 id: generateId(state.dialogs[0].messages),
-                text: state.newMessageText,
+                text: state.messageText,
             };
 
             state.dialogs[0].messages.push(newPost);
-            state.newMessageText = "";
+            state.messageText = "";
             return state;
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText;
+        case MESSAGE_TEXT_CHANGE:
+            state.messageText = action.newText;
             return state;
         default:
             return state;
@@ -70,9 +70,9 @@ export const addMessageActionCreator = () => {
         type: ADD_MESSAGE
     }
 };
-export const updateNewMessageTextActionCreator = (text) => {
+export const messageTextChangeActionCreator = (text) => {
     return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
+        type: MESSAGE_TEXT_CHANGE,
         newText: text
     }
 };
