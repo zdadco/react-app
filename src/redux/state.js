@@ -1,7 +1,5 @@
-let generateId = (array) => {
-    let maxId = Math.max.apply(Math, array.map(el => el.id ));
-    return maxId + 1;
-};
+import profileReducer, {ADD_POST, UPDATE_NEW_POST_TEXT} from "./profileReducer";
+import dialogsReducer, {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "./dialogsReducer";
 
 let store = {
     _state: {
@@ -21,6 +19,7 @@ let store = {
             ]
         },
         dialogs: {
+            newMessageText: "",
             dialogs: [
                 {
                     id: 1,
@@ -70,23 +69,9 @@ let store = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case 'ADD-POST': {
-                let newPost = {
-                    id: generateId(this._state.profile.posts),
-                    message: this._state.profile.newPostText,
-                    likesCount: 0
-                };
+        this._state.profile = profileReducer(this._state.profile, action);
+        this._state.dialogs = dialogsReducer(this._state.dialogs, action);
 
-                this._state.profile.posts.push(newPost);
-                this._state.profile.newPostText = "";
-                break
-            }
-            case 'UPDATE-NEW-POST-TEXT': {
-                this._state.profile.newPostText = action.newText;
-                break
-            }
-        }
         this._callSubscriber(this._state);
     }
 };
