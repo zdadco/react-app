@@ -6,7 +6,46 @@ let generateId = (array) => {
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+    newMessageText: "",
+    dialogs: [
+        {
+            id: 1,
+            name: 'Yaroslav',
+            messages: [
+                {
+                    id: 1,
+                    text: 'Hi'
+                },
+                {
+                    id: 2,
+                    text: 'How are you?'
+                },
+                {
+                    id: 3,
+                    text: 'How is your name?'
+                }
+            ]
+        },
+        {
+            id: 2,
+            name: 'Valera',
+            messages: []
+        },
+        {
+            id: 3,
+            name: 'Dima',
+            messages: []
+        },
+        {
+            id: 4,
+            name: 'Vova',
+            messages: []
+        }
+    ]
+};
+
+const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newPost = {

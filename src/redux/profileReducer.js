@@ -6,7 +6,23 @@ let generateId = (array) => {
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const profileReducer = (state, action) => {
+let initialState = {
+    newPostText: "",
+    posts: [
+        {
+            id: 1,
+            message: 'Hello world!!',
+            likesCount: 23
+        },
+        {
+            id: 2,
+            message: 'It\'s my blog',
+            likesCount: 0
+        }
+    ]
+};
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
