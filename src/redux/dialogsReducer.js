@@ -48,17 +48,21 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            state.dialogs[0].messages = [...state.dialogs[0].messages,
-                {
-                    id: generateId(state.dialogs[0].messages),
-                    text: state.messageText
-                }
-            ];
             return {
                 ...state,
-                dialogs: state.dialogs,
+                dialogs: state.dialogs.map(d => {
+                    if (d.id === 1) {
+                        return {
+                            ...d,
+                            messages: [...d.messages, {
+                                id: generateId(state.dialogs[0].messages),
+                                text: state.messageText
+                            }]
+                        }
+                    }
+                    return d;
+                }),
                 messageText: "",
-
             };
         case MESSAGE_TEXT_CHANGE:
             return {

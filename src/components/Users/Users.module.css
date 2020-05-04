@@ -1,0 +1,36 @@
+.userBlock {
+    display: grid;
+    width: 70%;
+    margin: auto;
+    grid-template-rows: auto;
+    grid-template-columns: 4fr 8fr;
+    grid-template-areas: "avatar info";
+}
+
+.avatarBlock {
+    grid-area: avatar;
+}
+
+.infoBlock {
+    grid-area: info;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 4fr 4fr;
+    grid-template-areas: "personInfo personLocation";
+    align-items: center;
+}
+
+.infoBlock .personInfo {
+    grid-area: personInfo;
+    justify-self: start;
+}
+
+.infoBlock .personLocation {
+    grid-area: personLocation;
+    justify-self: end;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+}

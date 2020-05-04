@@ -1,13 +1,12 @@
-import React from "react"
 import {addMessageActionCreator, messageTextChangeActionCreator} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        dialogs: state.dialogs.dialogs,
-        messages: state.dialogs.dialogs[0].messages,
-        messageText: state.dialogs.messageText
+        dialogs: state.dialogsState.dialogs,
+        messages: state.dialogsState.dialogs[0].messages,
+        messageText: state.dialogsState.messageText
     }
 };
 let mapDispatchToProps = (dispatch) => {
@@ -21,6 +20,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-export default DialogsContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);

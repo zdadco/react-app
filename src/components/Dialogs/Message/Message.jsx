@@ -1,13 +1,17 @@
 import React from "react"
 import style from './Message.module.css'
 
-const Message = (props) => {
-    return (
-        <div className={style.message}>
-            {props.message.text}
-        </div>
-    )
-};
+class Message extends React.Component {
+
+    render() {
+        return (
+            <div className={style.message}>
+                {this.props.message.text}
+            </div>
+        )
+    }
+
+}
 
 
 export default Message

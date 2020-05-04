@@ -2,36 +2,43 @@ import React from "react"
 import style from './PostsList.module.css'
 import Post from "./Post/Post";
 
-const PostsList = (props) => {
-    let posts = props.posts.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}/>);
-    let postTextEl = React.createRef();
+class PostsList extends React.Component {
 
-    let onAddPost = () => {
-        props.addPost();
-    };
-    let onPostTextChange = () => {
-        props.postTextChange(postTextEl.current.value);
+    componentDidMount() {
+        this.posts = this.props.posts.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}/>);
+        this.postTextEl = React.createRef();
+    }
+
+    onAddPost = () => {
+        this.props.addPost();
     };
 
-    return (
-        <div className={style.profile_posts_block}>
-            <h3>Posts</h3>
-            <div>
+    onPostTextChange = () => {
+        this.props.postTextChange(this.postTextEl.current.value);
+    };
+
+    render() {
+        return (
+            <div className={style.profile_posts_block}>
+                <h3>Posts</h3>
                 <div>
-                    <textarea ref={postTextEl}
-                              value={props.postText}
-                              onChange={onPostTextChange}
+                    <div>
+                    <textarea ref={this.postTextEl}
+                              value={this.props.postText}
+                              onChange={this.onPostTextChange}
                     />
+                    </div>
+                    <div>
+                        <button onClick={this.onAddPost}>Add post</button>
+                    </div>
                 </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
+                <div className={style.posts}>
+                    {this.posts}
                 </div>
             </div>
-            <div className={style.posts}>
-                {posts}
-            </div>
-        </div>
-    )
-};
+        )
+    }
+
+}
 
 export default PostsList

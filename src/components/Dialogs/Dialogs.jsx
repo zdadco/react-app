@@ -3,39 +3,45 @@ import style from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
-const Dialogs = (props) => {
-    let dialogs = props.dialogs.map(user => <Dialog key={user.id} user={user}/>);
-    let messages = props.messages.map(message => <Message key={message.id} message={message}/>);
-    let messageTextEl = React.createRef();
+class Dialogs extends React.Component {
 
-    let onAddMessage = () => {
-        props.addMessage();
+    componentDidMount() {
+        this.dialogs = this.props.dialogs.map(user => <Dialog key={user.id} user={user}/>);
+        this.messages = this.props.messages.map(message => <Message key={message.id} message={message}/>);
+        this.messageTextEl = React.createRef();
+    }
+
+    onAddMessage = () => {
+        this.props.addMessage();
 
     };
-    let onMessageTextChange = () => {
-        props.messageTextChange(messageTextEl.current.value);
+    onMessageTextChange = () => {
+        this.props.messageTextChange(this.messageTextEl.current.value);
     };
 
-    return (
-        <div className={style.dialogs_wrapper}>
-            <div className={style.dialogs}>
-                {dialogs}
-            </div>
-            <div className={style.dialog}>
-                <div className={style.messages}>
-                    {messages}
+    render() {
+        return (
+            <div className={style.dialogs_wrapper}>
+                <div className={style.dialogs}>
+                    {this.dialogs}
                 </div>
-                <div className={style.add}>
-                    <textarea className={style.add_message_area}
-                              ref={messageTextEl}
-                              value={props.messageText}
-                              onChange={onMessageTextChange}
-                    />
-                    <button className={style.add_btn} onClick={onAddMessage}>Отправить сообщение</button>
+                <div className={style.dialog}>
+                    <div className={style.messages}>
+                        {this.messages}
+                    </div>
+                    <div className={style.add}>
+                        <textarea className={style.add_message_area}
+                                  ref={this.messageTextEl}
+                                  value={this.props.messageText}
+                                  onChange={this.onMessageTextChange}
+                        />
+                        <button className={style.add_btn} onClick={this.onAddMessage}>Отправить сообщение</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
-};
+        )
+    }
+
+}
 
 export default Dialogs

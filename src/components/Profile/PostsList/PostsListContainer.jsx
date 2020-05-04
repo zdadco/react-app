@@ -1,12 +1,11 @@
-import React from "react"
 import {addPostActionCreator, postTextChangeActionCreator} from "../../../redux/profileReducer";
 import PostsList from "./PostsList";
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        posts: state.profile.posts,
-        postText: state.profile.postText
+        posts: state.profileState.posts,
+        postText: state.profileState.postText
     }
 };
 let mapDispatchToProps = (dispatch) => {
@@ -20,6 +19,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-const PostsListContainer = connect(mapStateToProps, mapDispatchToProps)(PostsList);
-
-export default PostsListContainer
+export default connect(mapStateToProps, mapDispatchToProps) (PostsList);

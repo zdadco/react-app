@@ -48,10 +48,10 @@ export const addPostActionCreator = () => {
         type: ADD_POST
     }
 };
-export const postTextChangeActionCreator = (text) => {
+export const postTextChangeActionCreator = (newText) => {
     return {
         type: POST_TEXT_CHANGE,
-        newText: text
+        newText
     }
 };
 
