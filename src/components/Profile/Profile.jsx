@@ -2,17 +2,15 @@ import React from "react"
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import PostsListContainer from "./PostsList/PostsListContainer";
 
-class Profile extends React.Component {
+const Profile = (props) => {
 
-    render() {
-        return (
-            <div>
-                <ProfileInfo/>
-                <PostsListContainer/>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <ProfileInfo profile={props.profile} />
+            <PostsListContainer/>
+        </div>
+    )
 
-}
+};
 
 export default Profile

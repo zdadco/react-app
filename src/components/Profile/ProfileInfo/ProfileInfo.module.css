@@ -5,10 +5,25 @@
 
 .description {
     padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr;
+    grid-template-areas:
+            "avatar ."
+            "about contacts";
 }
 
 .description img {
+    grid-area: avatar;
     width: 100px;
     height: 100px;
     border-radius: 15px;
+}
+
+.about {
+    grid-area: about;
+}
+
+.contacts {
+    grid-area: contacts;
 }

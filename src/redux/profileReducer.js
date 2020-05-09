@@ -5,6 +5,7 @@ let generateId = (array) => {
 
 const ADD_POST = 'ADD-POST';
 const POST_TEXT_CHANGE = 'POST-TEXT-CHANGE';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 let initialState = {
     postText: "",
@@ -19,7 +20,8 @@ let initialState = {
             message: 'It\'s my blog',
             likesCount: 0
         }
-    ]
+    ],
+    profile: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -38,6 +40,8 @@ const profileReducer = (state = initialState, action) => {
         case POST_TEXT_CHANGE:
             stateCopy.postText = action.newText;
             return stateCopy;
+        case SET_USER_PROFILE:
+            return { ...state, profile: action.profile };
         default:
             return state;
     }
@@ -54,5 +58,6 @@ export const postTextChangeActionCreator = (newText) => {
         newText
     }
 };
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 
 export default profileReducer;

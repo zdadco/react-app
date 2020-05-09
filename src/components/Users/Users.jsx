@@ -1,52 +1,68 @@
 import React from "react";
 import style from "./Users.module.css";
 import avatar from "../../asserts/avatar.jpg";
-import * as axios from "axios";
+import {NavLink} from "react-router-dom";
 
-class Users extends React.Component {
+let Users = (props) => {
 
-    updateUsers = () => {
-        axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => this.props.updateUsers(response.data.items));
-    };
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pages = [];
 
-    render() {
-        return (
+    for (let i = 1; i <= pagesCount ; i++) {
+        if (i > 5) {
+            break;
+        }
+        pages.push(i);
+    }
+
+    return (
+        <div>
             <div>
                 {
-                    this.props.users.map(user =>
-                        <div key={user.id} className={style.userBlock}>
-                            <div className={style.avatarBlock}>
-                                <div>
-                                    <img className={style.avatar}
-                                         src={ user.photos.small != null ? user.photos.small : avatar}
-                                         alt="User avatar"/>
-                                </div>
-                                <div>
-                                    {
-                                        user.followed
-                                            ? <button onClick={() => this.props.changeFollowStatus(user.id)}>Unfollow</button>
-                                            : <button onClick={() => this.props.changeFollowStatus(user.id)}>Follow</button>
-                                    }
-                                </div>
-                            </div>
-                            <div className={style.infoBlock}>
-                                <div className={style.personInfo}>
-                                    <div>{user.name}</div>
-                                    <div>{user.status}</div>
-                                </div>
-                                <div className={style.personLocation}>
-                                    <div>{"user.location.country"}</div>
-                                    <div>{"user.location.city"}</div>
-                                </div>
-                            </div>
-                        </div>
+                    pages.map(p =>
+                        <span
+                            key={p}
+                            className={ props.currentPage === p ? style.selectedPage : undefined }
+                            onClick={ () => props.onPageChange(p) }
+                        >{ p }</span>
                     )
                 }
             </div>
-        );
-    }
+            {
+                props.users.map(user =>
+                    <div key={user.id} className={style.userBlock}>
+                        <div className={style.avatarBlock}>
+                            <div>
+                                <NavLink to={'/profile/' + user.id}>
+                                    <img className={style.avatar}
+                                         src={ user.photos.small != null ? user.photos.small : avatar}
+                                         alt="User avatar"/>
+                                </NavLink>
+                            </div>
+                            <div>
+                                {
+                                    user.followed
+                                        ? <button onClick={() => props.changeFollowStatus(user.id)}>Unfollow</button>
+                                        : <button onClick={() => props.changeFollowStatus(user.id)}>Follow</button>
+                                }
+                            </div>
+                        </div>
+                        <div className={style.infoBlock}>
+                            <div className={style.personInfo}>
+                                <div>{user.name}</div>
+                                <div>{user.status}</div>
+                            </div>
+                            <div className={style.personLocation}>
+                                <div>{"user.location.country"}</div>
+                                <div>{"user.location.city"}</div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        </div>
+    );
+
 }
 
 export default Users;
