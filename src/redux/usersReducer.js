@@ -1,4 +1,5 @@
-const CHANGE_FOLLOW_STATUS = "CHANGE-FOLLOW-STATUS";
+const FOLLOW = "FOLLOW";
+const UNFOLLOW = "UNFOLLOW";
 const UPDATE_USERS = "UPDATE-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
@@ -18,14 +19,27 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state, users: action.users
             };
-        case CHANGE_FOLLOW_STATUS:
+        case FOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {
                             ...u,
-                            followed: !u.followed
+                            followed: true
+                        }
+                    }
+                    return u;
+                })
+            };
+            case UNFOLLOW:
+            return {
+                ...state,
+                users: state.users.map(u => {
+                    if (u.id === action.userId) {
+                        return {
+                            ...u,
+                            followed: false
                         }
                     }
                     return u;
@@ -48,12 +62,8 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
-export const changeFollowStatus = (userId) => {
-    return {
-        type: CHANGE_FOLLOW_STATUS,
-        userId
-    }
-};
+export const follow = (userId) => ({ type: FOLLOW, userId });
+export const unfollow = (userId) => ({ type: UNFOLLOW, userId });
 export const updateUsers = (users) => {
     return {
         type: UPDATE_USERS,

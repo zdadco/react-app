@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Users.module.css";
 import avatar from "../../asserts/avatar.jpg";
 import {NavLink} from "react-router-dom";
+import UsersApi from "../../api/api";
 
 let Users = (props) => {
 
@@ -41,9 +42,21 @@ let Users = (props) => {
                             </div>
                             <div>
                                 {
-                                    user.followed
-                                        ? <button onClick={() => props.changeFollowStatus(user.id)}>Unfollow</button>
-                                        : <button onClick={() => props.changeFollowStatus(user.id)}>Follow</button>
+                                    user.followed ? <button onClick={() => {
+                                           UsersApi.unfollow(user.id).then(data =>  {
+                                                if (data.resultCode === 0) {
+                                                    props.unfollow(user.id);
+
+                                                }
+                                            });
+                                        }}>Unfollow</button> : <button onClick={() => {
+                                            UsersApi.follow(user.id).then(data =>  {
+                                                if (data.resultCode === 0) {
+                                                    props.follow(user.id);
+
+                                                }
+                                            });
+                                        }}>Follow</button>
                                 }
                             </div>
                         </div>
