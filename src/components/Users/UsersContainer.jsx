@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     changeFetchingStatus,
+    changeFollowingStatus,
     follow,
     setCurrentPage,
     setTotalUsersCount,
@@ -44,6 +45,8 @@ class UsersContainer extends React.Component {
                 onPageChange={this.onPageChange}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
+                changeFollowingStatus={this.props.changeFollowingStatus}
+                followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -56,11 +59,12 @@ let mapStateToProps = (state) => {
         pageSize: state.usersState.pageSize,
         totalUsersCount: state.usersState.totalUsersCount,
         currentPage: state.usersState.currentPage,
-        isFetching: state.usersState.isFetching
+        isFetching: state.usersState.isFetching,
+        followingInProgress: state.usersState.followingInProgress
     }
 };
 
 export default connect(
     mapStateToProps,
-    {follow, unfollow, updateUsers, setCurrentPage, setTotalUsersCount, changeFetchingStatus}
+    {follow, unfollow, updateUsers, setCurrentPage, setTotalUsersCount, changeFetchingStatus, changeFollowingStatus}
 )(UsersContainer);

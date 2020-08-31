@@ -9,7 +9,7 @@ let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
 
-    for (let i = 1; i <= pagesCount ; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         if (i > 5) {
             break;
         }
@@ -23,9 +23,9 @@ let Users = (props) => {
                     pages.map(p =>
                         <span
                             key={p}
-                            className={ props.currentPage === p ? style.selectedPage : undefined }
-                            onClick={ () => props.onPageChange(p) }
-                        >{ p }</span>
+                            className={props.currentPage === p ? style.selectedPage : undefined}
+                            onClick={() => props.onPageChange(p)}
+                        >{p}</span>
                     )
                 }
             </div>
@@ -36,25 +36,31 @@ let Users = (props) => {
                             <div>
                                 <NavLink to={'/profile/' + user.id}>
                                     <img className={style.avatar}
-                                         src={ user.photos.small != null ? user.photos.small : avatar}
+                                         src={user.photos.small != null ? user.photos.small : avatar}
                                          alt="User avatar"/>
                                 </NavLink>
                             </div>
                             <div>
                                 {
-                                    user.followed ? <button onClick={() => {
-                                           UsersApi.unfollow(user.id).then(data =>  {
+                                    user.followed
+                                        ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                            props.changeFollowingStatus(true, user.id);
+                                            UsersApi.unfollow(user.id).then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.unfollow(user.id);
 
                                                 }
+                                                props.changeFollowingStatus(false, user.id);
                                             });
-                                        }}>Unfollow</button> : <button onClick={() => {
-                                            UsersApi.follow(user.id).then(data =>  {
+                                        }}>Unfollow</button>
+                                        : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                            props.changeFollowingStatus(true, user.id);
+                                            UsersApi.follow(user.id).then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.follow(user.id);
 
                                                 }
+                                                props.changeFollowingStatus(false, user.id);
                                             });
                                         }}>Follow</button>
                                 }

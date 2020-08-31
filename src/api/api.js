@@ -16,7 +16,7 @@ const UsersAPI = {
         instance.post(`follow/${userId}`).then(response => response.data),
 
     unfollow: (userId) =>
-        instance.delete(`unfollow/${userId}`).then(response => response.data)
+        instance.delete(`follow/${userId}`).then(response => response.data)
 };
 
 export default UsersAPI;
