@@ -1,3 +1,5 @@
+import UsersAPI from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const UPDATE_USERS = "UPDATE-USERS";
@@ -34,7 +36,7 @@ const usersReducer = (state = initialState, action) => {
                     return u;
                 })
             };
-            case UNFOLLOW:
+        case UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -71,8 +73,8 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
-export const follow = (userId) => ({ type: FOLLOW, userId });
-export const unfollow = (userId) => ({ type: UNFOLLOW, userId });
+export const follow = (userId) => ({type: FOLLOW, userId});
+export const unfollow = (userId) => ({type: UNFOLLOW, userId});
 export const updateUsers = (users) => {
     return {
         type: UPDATE_USERS,
@@ -102,6 +104,18 @@ export const changeFollowingStatus = (isFetching, userId) => {
         type: CHANGE_FOLLOWING_STATUS,
         isFetching,
         userId
+    }
+};
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(changeFetchingStatus(true));
+        dispatch(setCurrentPage(currentPage));
+        UsersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(updateUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+            dispatch(changeFetchingStatus(false));
+        });
     }
 };
 
